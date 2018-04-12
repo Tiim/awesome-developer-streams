@@ -1,0 +1,32 @@
+{
+  "name": "awesome-developer-streams-cli",
+  "version": "0.1.0",
+  "description": "The cli for the curated list of awesome developers who stream.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bnb/awesome-developer-streams.git"
+  },
+  "keywords": [
+    "awesome",
+    "awesome-list",
+    "twitch",
+    "periscope",
+    "streaming",
+    "developers",
+    "youtube",
+    "twitchdev"
+  ],
+  "author": "",
+  "license": "CC0-1.0",
+  "bugs": {
+    "url": "https://github.com/bnb/awesome-developer-streams/issues"
+  },
+  "homepage": "https://github.com/bnb/awesome-developer-streams#readme",
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
