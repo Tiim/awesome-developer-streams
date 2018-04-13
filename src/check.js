@@ -29,6 +29,10 @@ const schema = {
                         type: 'array',
                         items: { type: 'string' }
                     },
+                    langs: {
+                        type: 'array',
+                        items: { type: 'string' }
+                    },
                     links: {
                         type: 'array',
                         items: {

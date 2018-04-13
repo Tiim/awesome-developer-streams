@@ -3,10 +3,28 @@ const fs = require('fs');
 const services = [
     { pattern: 'twitch.tv', name: 'Twitch' },
     { pattern: 'youtube.com', name: 'Youtube'},
-    { pattern: 'mixer.com', name: 'Mixer'}
+    { pattern: 'mixer.com', name: 'Mixer'},
+    { pattern: 'facebook.com', name: 'Facebook' },
+    { pattern: 'air.mozilla.org', name: 'Air Mozilla' },
 ]
 
 const filename = 'data.json'
+const sortBy = 'added' //other option: modified
+
+function sort(json) {
+    const arr = json.streamers;
+    arr.sort(compare);
+}
+
+function compare(a,b) {
+    d1 = new Date(a[sortBy]);
+    d2 = new Date(b[sortBy]);
+    if (d1 < d2)
+      return -1;
+    if (d1 > d2)
+      return 1;
+    return 0;
+  }
 
 module.exports.streamName = function (urls) {
     const obj = urls.map(url => ({ 
@@ -20,6 +38,7 @@ module.exports.streamName = function (urls) {
 }
 
 module.exports.save = function (json) {
+    sort(json);
     fs.writeFileSync(filename, JSON.stringify(json, null, 4));
 }
 
