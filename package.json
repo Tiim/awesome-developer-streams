@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node index.js check",
-    "run": "node index.js"
+    "start": "node index.js interactive"
   },
   "repository": {
     "type": "git",
