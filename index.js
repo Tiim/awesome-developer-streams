@@ -2,32 +2,21 @@ const fs = require('fs');
 const program = require('commander');
 
 const add = require('./src/add');
+const check = require('./src/check');
 const render = require('./src/render');
+const listTags = require('./src/listtags');
+const interactive = require('./src/interactive');
 
 
-const jsonFile = 'data.json';
-const data = initJsonFile(jsonFile);
-
-add(program, data);
-render(program, data);
+add(program);
+check(program);
+render(program);
+listTags(program);
+interactive(program);
 
 program.parse(process.argv);
-saveJsonFile(jsonFile, data);
 
-
-
-
-function initJsonFile(filename) {
-    if (!fs.existsSync(filename)) {
-        console.log('no data.json file found');
-        return {
-            streamers: []
-        }
-    }
-    let rawdata = fs.readFileSync(filename);  
-    return JSON.parse(rawdata); 
-}
-
-function saveJsonFile(filename, json) {
-    fs.writeFileSync(filename, JSON.stringify(json, null, 4));
+// No command specified
+if (program.args.length === 0) {
+  program.help();
 }

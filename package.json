@@ -4,7 +4,8 @@
   "description": "The cli for the curated list of awesome developers who stream.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node index.js check",
+    "run": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,9 @@
   },
   "homepage": "https://github.com/bnb/awesome-developer-streams#readme",
   "dependencies": {
-    "commander": "^2.15.1"
+    "commander": "^2.15.1",
+    "inquirer": "^5.2.0",
+    "jsonschema": "^1.2.4",
+    "outdent": "^0.5.0"
   }
 }
