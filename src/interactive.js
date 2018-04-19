@@ -5,6 +5,7 @@ const { streamName, load, save } = require('./util');
 const add = require('./interactive/add');
 const render = require('./interactive/render');
 const filtertag = require('./interactive/filtertag');
+const check = require('./interactive/check');
 
 
 
@@ -19,6 +20,7 @@ async function interactive(cmd) {
             choices: [
                 { name: 'Add a streamer to the list', value: add },
                 { name: 'Update README.md', value: render},
+                { name: 'Check if the data.json file is valid', value: check},
                 { name: 'Filter streamers by tag', value: filtertag},
                 { name: 'Quit', value: 'quit' }
             ]
