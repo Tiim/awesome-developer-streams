@@ -35,7 +35,7 @@ function add(cmd) {
 }
 
 
-module.exports = function (cmd) {
+module.exports.cmd = function (cmd) {
     cmd.command('add')
         .description('Add a streamer to the list')
         .option('-n, --streamer-name <name>', 'Set the name of the streamer (required)')

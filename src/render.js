@@ -5,13 +5,9 @@ const {load} = require('./util')
 
 const usedHeaders = [];
 
-function render({ outputFile }) {
-    const json = load();
-    const header = fs.readFileSync('res/readme_header.md');
-    const toc = renderTableOfContent(json);
-    const body = renderBody(json);
-    console.log(outputFile)
-    fs.writeFileSync(outputFile, header + toc + '\n' + body);
+function renderCnd({ outputFile }) {
+    const string = render();
+    fs.writeFileSync(outputFile, string)
 }
 
 function renderTableOfContent(json) {
@@ -27,7 +23,7 @@ function renderTocEntry(s) {
 
 function renderBody(json) {
     const header = '## Developers That Stream\n\n';
-    return header + json.streamers.map(renderStreamer).join('\n') + '\n';
+    return header + json.streamers.map(renderStreamer).join('\n\n') + '\n';
 }
 
 function renderStreamer(s) {
@@ -37,9 +33,21 @@ function renderStreamer(s) {
     - ${s.tags.join(', ')}
     #### Streaming on:
     ${renderStreams(s.streams)}
+    ${renderLanguages(s.langs)}
     #### Links:
     ${renderLinks(s.links)}
     `;
+}
+
+function renderLanguages(array) {
+    if (array.length === 1 && array[0] === 'English') {
+        return '';
+    } else {
+        return outdent`
+        #### Languages Spoken During Stream
+        ${array.map(l => `- ${l}`)}
+        `;
+    }
 }
 
 function renderStreams(streams) {
@@ -61,7 +69,17 @@ function slugify(val) {
     return anchor
 }
 
-module.exports = function (cmd) {
+function render(data = load()) {
+    const header = fs.readFileSync('res/readme_header.md');
+    const toc = renderTableOfContent(data);
+    const body = renderBody(data);
+
+    const string = header + toc + '\n' + body;
+    return string;
+}
+module.exports.render = render;
+
+module.exports.cmd = function (cmd) {
     cmd.command('render')
         .description('Render the data to a markdown file')
         .option('-o, --output-file <filename>', 'Set custom filename', 'README_.md')

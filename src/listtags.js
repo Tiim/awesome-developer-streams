@@ -1,9 +1,13 @@
 const {load} = require('./util')
 
 
-function listTags() {
-    const data = load();
+function listTagsCmd() {
+    const tags = listTags();
+    
+    console.log(tags.join('\n'));
+}
 
+function listTags(data = load()) {
     const tags = [];
 
     data.streamers.forEach(streamer => {
@@ -13,12 +17,12 @@ function listTags() {
             }
         });
     });
-    
-    console.log(tags.join('\n'));
+    return tags;
 }
+module.exports.listTags = listTags;
 
-module.exports = function (cmd) {
+module.exports.cmd = function (cmd) {
     cmd.command('list-tags')
         .description('List all tags')
-        .action(listTags);
+        .action(listTagsCmd);
 }

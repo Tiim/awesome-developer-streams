@@ -8,11 +8,11 @@ const listTags = require('./src/listtags');
 const interactive = require('./src/interactive');
 
 
-add(program);
-check(program);
-render(program);
-listTags(program);
-interactive(program);
+add.cmd(program);
+check.cmd(program);
+render.cmd(program);
+listTags.cmd(program);
+interactive.cmd(program);
 
 program.parse(process.argv);
 

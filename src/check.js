@@ -55,17 +55,23 @@ const schema = {
     reqired: ['streamers']
 }
 
-function check() {
-    const data = load();
-    const val = v.validate(data, schema);
-    if (val.errors.length) {
-        val.errors.forEach(e => console.error(e.stack));
+function checkCmd() {
+    const errors = check();
+    if (errors.length) {
+        errors.forEach(e => console.error(e.stack));
         process.exit(1);
     }
 }
 
-module.exports = function (cmd) {
+function check(data = load()) {
+    const val = v.validate(data, schema);
+    return val.errors;
+}
+
+module.exports.check = check;
+
+module.exports.cmd = function (cmd) {
     cmd.command('check')
         .description('Check if data.json is valid')
-        .action(check);
+        .action(checkCmd);
 }

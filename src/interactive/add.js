@@ -17,6 +17,7 @@ module.exports = async function add(data) {
         added: new Date(),
         modified: new Date()
     })
+    console.log('Done');
 }
 
 async function getName() {
